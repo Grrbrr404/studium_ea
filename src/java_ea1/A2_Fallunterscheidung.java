@@ -1,4 +1,4 @@
-package ea1;
+package java_ea1;
 
 public class A2_Fallunterscheidung {
 
