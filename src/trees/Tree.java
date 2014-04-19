@@ -1,13 +1,13 @@
 package trees;
 
 public class Tree {
-	Node root;
+	private Node root;
+	private int gradeOfTree = 0;
 	
 	public Tree(Node rootNode) {
 		this.root = rootNode;
 	}
 	
-
 	/**
 	 * Prints all keys starting from root node to console
 	 */
@@ -15,6 +15,7 @@ public class Tree {
 		printKeys(this.root);
 	}
 	
+
 	/**
 	 * Prints all keys below startNode (startNode key included)
 	 * @param startNode The node to start with
@@ -34,23 +35,35 @@ public class Tree {
 	}
 	
 	public int getTreeGrade() {
-		return this.getGradeOfNode(this.root.leftmostChild);
+		this.gradeOfTree = 0;
+		this.getGradeOfNode(this.root.leftmostChild);
+		return this.gradeOfTree;
 	}
 	
-	public int getGradeOfNode(Node startNode) {
-		int grade = 0;
+	private void getGradeOfNode(Node startNode) {
 		if (startNode != null) {
-			grade++;
+			// System.out.println(startNode.getKey());
+			
 			if (startNode.rightSibling != null) {
-				grade = grade + getGradeOfNode(startNode.rightSibling);
+				getGradeOfNode(startNode.rightSibling);
 			}
 			
 			if (startNode.leftmostChild != null) {
-				grade = grade + getGradeOfNode(startNode.leftmostChild);
+				getGradeOfNode(startNode.leftmostChild);
 			}
+			
+			Node currentNode = startNode;
+			int grade = 1;
+			while (currentNode.rightSibling != null) {
+				grade++;
+				currentNode = currentNode.rightSibling;
+			}
+			
+			if (grade > this.gradeOfTree) {
+				gradeOfTree = grade;
+			}
+			
 		}
-		
-		return grade;
 	}
 	
 	public ArrayNode ConvertToArrayTree() {

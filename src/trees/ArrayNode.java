@@ -6,6 +6,7 @@ public class ArrayNode {
 	
 	public ArrayNode(Elem value, int sonCount) {
 		sons = new ArrayNode[sonCount];
+		key = value;
 	}
 	
 	public void setKey(Elem newValue) {
