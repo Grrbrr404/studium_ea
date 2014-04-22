@@ -13,19 +13,39 @@ public class Set {
 		this.sizeOfMemory = size;
 	}
 	
+	public void print() {
+		System.out.print("{");
+		for (int i = 0; i < sizeOfMemory; i++) {
+		    String item = "null";
+		    if (memory[i] != null) {
+		    	item = memory[i].getValue();
+		    }
+			System.out.print(" [" + item + "] ");
+		}
+		System.out.println("}");
+	}
+	
 	public boolean contains(SetElement element) {
 		for (int i = 0; i < sizeOfMemory; i++) {
-			if (memory[i].getValue() == element.getValue()) {
-				return true;
+			if (memory[i] != null)  {
+				if (memory[i].getValue() == element.getValue()) {
+					return true;
+				}
 			}
 		}
 		
 		return false;
 	}
 	
-	public void insert(SetElement element) {
-		if (!this.contains(element)) {
-			memory[itemIndex++] = element; 
+	public void insert(String newItemValue) {
+		SetElement element = new SetElement(newItemValue);
+		if (!contains(element)) {
+			if (itemIndex < sizeOfMemory) {
+				memory[itemIndex++] = element; 
+			}
+			else {
+				System.out.println("Not enough space in set");
+			}
 		}
 		else {
 			System.out.println("Error: Element with value " 
@@ -35,8 +55,25 @@ public class Set {
 	}
 	
 	public SetElement remove() {
-		Random rnd = new Random();
-		int removeIndex = rnd.nextInt(itemIndex);	
-		return memory[removeIndex];
+		SetElement result = null;
+		if (itemIndex > 0) {
+			// Get a random index to remove
+			Random rnd = new Random();
+			int removeIndex = rnd.nextInt(itemIndex);	
+			result = memory[removeIndex]; 
+					
+			// Set element at removeIndex to null to let garbage collector clear memory
+			memory[removeIndex] = null;
+			
+			// Rearrange memory, put top most element to removeIndex
+			if (removeIndex < (itemIndex-1)) {
+				memory[removeIndex] = memory[(itemIndex-1)];
+				memory[(itemIndex-1)] = null;
+			}
+			
+			itemIndex--;
+		}
+		
+		return result;
 	}
 }
