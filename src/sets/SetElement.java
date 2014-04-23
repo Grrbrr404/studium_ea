@@ -1,17 +1,14 @@
 package sets;
 
-public class SetElement {
-	private String value;
-
-	public SetElement(String value) {
-		this.value = value;
-	}
+public interface SetElement {
 	
-	public String getValue() {
-		return value;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
-	}
+	/**
+	 * @return Eindeutiger Schlüssel des Elements
+	 */
+	int getKey();
+	
+	/**
+	 * @return Einen Namen
+	 */
+	String getName();
 }
