@@ -24,13 +24,15 @@ public class Tree {
 		if (startNode != null) {
 			System.out.println(startNode.getKey());
 			
+			if (startNode.leftmostChild != null) {
+				printKeys(startNode.leftmostChild);
+			}
+			
 			if (startNode.rightSibling != null) {
 				printKeys(startNode.rightSibling);
 			}
 			
-			if (startNode.leftmostChild != null) {
-				printKeys(startNode.leftmostChild);
-			}
+			
 		}
 	}
 	

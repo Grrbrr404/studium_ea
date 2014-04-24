@@ -15,13 +15,29 @@ public class A1_Trees {
 		System.out.println("Aufgabe b)");
 		System.out.println(Integer.toString(tree.getTreeGrade()));
 		
+		System.out.println("");
+		System.out.println("Aufgabe c)");
+		ArrayNode  at = tree.ConvertToArrayTree();
+		printArrayTree(at);
+	}
+	
+	
+	public static void printArrayTree(ArrayNode node) {
+		if (node != null) {
+			
+			System.out.println(node.key);
+			for (int i = 0; i < node.sons.length; i++) {
+				printArrayTree(node.sons[i]);
+			}
+			
+		}
 	}
 	
 	/*
 	 *                   17
 	 *                 14  13
 	 *              1     7 30 31 32 33 
-	 *         2   3  28 29
+	 *         2   3  28 29        34 35  
 	 *                 
 	 */
 	public static Node CreateTree() {
@@ -38,6 +54,8 @@ public class A1_Trees {
 		Node n_31 = new Node(new ElemInteger(31));
 		Node n_32 = new Node(new ElemInteger(32));
 		Node n_33 = new Node(new ElemInteger(33));
+		Node n_34 = new Node(new ElemInteger(34));
+		Node n_35 = new Node(new ElemInteger(35));
 		
 		root.leftmostChild = n_14;
 		
@@ -50,6 +68,8 @@ public class A1_Trees {
 		n_30.rightSibling = n_31;
 		n_31.rightSibling = n_32;
 		n_32.rightSibling = n_33;
+		n_33.leftmostChild = n_34;
+		n_34.rightSibling = n_35;
 		
 		n_1.leftmostChild = n_2;
 		
