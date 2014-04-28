@@ -10,8 +10,8 @@ public class A2_Sets {
 		Mercedes b = new Mercedes();
 		Person p = new Person();
 		Bmw bmw = new Bmw();
-		
-		Set set = new Set(2);
+		int n = 5;
+		Set set = new Set(n);
 		set.insert(a);
 		set.insert(a); // Error 1
 		set.insert(b); // Error 2
